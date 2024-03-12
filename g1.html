@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G1 - Single Player</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #1A1A1A; /* Changed background color */
+    font-family: Arial, sans-serif;
+  }
+  #pongCanvas {
+    display: block;
+    margin: auto;
+    background-color: #000; /* Canvas background color */
+    border: 2px solid #fff; /* Canvas border */
+  }
+  .back-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .back-button:hover {
+    background-color: #fff;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+<canvas id="pongCanvas" width="800" height="400"></canvas>
+<button class="back-button" onclick="window.location.href='index.html'">Back</button>
+<script src="g1.js"></script>
+</body>
+</html>

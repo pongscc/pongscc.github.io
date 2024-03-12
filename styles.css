@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #1a1a1a;
+  transition: background-color 0.5s ease;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+  display: flex;
+  flex-direction: column; /* Imposta la direzione dei flex items in verticale */
+  align-items: center; /* Centra gli elementi verticalmente */
+  justify-content: center; /* Centra gli elementi orizzontalmente */
+  height: 100vh; /* Imposta l'altezza del corpo a tutta l'altezza della finestra */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+h1 {
+  color: #ffffff;
+  text-align: center;
+  padding-top: 50px;
+  font-size: 48px;
+  text-transform: uppercase;
+}
+
+.animated-title {
+  animation: neon 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon {
+  from {
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 70px #00ffff, 0 0 80px #00ffff, 0 0 100px #00ffff, 0 0 150px #00ffff;
+  }
+  to {
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff, 0 0 20px #00ffff, 0 0 35px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff, 0 0 75px #00ffff;
+  }
+}
+
+.buttons-container {
+  margin-top: 20px; /* Spazio sopra i pulsanti */
+}
+
+.game-button {
+  padding: 15px 30px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  margin: 10px; /* Spazio tra i pulsanti */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.game-button:hover {
+  background-color: #555;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 15px 25px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+  background-color: #555;
+}
+
+.score-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  font-size: 18px;
+}
