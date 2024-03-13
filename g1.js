@@ -12,6 +12,10 @@ let paddleRightY = (canvas.height - paddleHeight) / 2;
 let upPressed = false;
 let downPressed = false;
 
+let touchStartY = 0;
+let touchMoveY = 0;
+let touchDragThreshold = 10; // Threshold for touch drag movement
+
 let gameEnded = false;
 
 let player1Wins = 0; // Track player 1 wins
@@ -34,6 +38,9 @@ let speedIncreaseInterval; // Track the speed increase interval
 
 const speedIncreasePercentage = 5;
 const speedIncreaseFactor = 1 + speedIncreasePercentage / 100;
+
+let countdownInProgress = false; // Track if countdown animation is in progress
+let countdownValue = 0; // Track the countdown value
 
 function drawBall() {
   context.beginPath();
@@ -66,7 +73,7 @@ function draw() {
     context.fillStyle = 'white';
     context.font = '30px Arial';
     context.fillText('Game Over!', canvas.width / 2 - 100, canvas.height / 2);
-    context.fillText('Press SPACE to restart', canvas.width / 2 - 150, canvas.height / 2 + 40);
+    context.fillText('Click anywhere to restart', canvas.width / 2 - 150, canvas.height / 2 + 40);
     clearInterval(speedIncreaseInterval); // Stop the speed increase interval
     return;
   }
@@ -100,7 +107,16 @@ function draw() {
     player1Wins++; // Increment player 1 wins
   }
 
-  requestAnimationFrame(draw);
+  // Draw countdown animation
+  if (countdownInProgress) {
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = 'white';
+    context.font = '100px Arial';
+    context.fillText(countdownValue, canvas.width / 2 - 50, canvas.height / 2 + 50);
+  } else {
+    requestAnimationFrame(draw);
+  }
 }
 
 function endGame() {
@@ -150,7 +166,50 @@ function keyUpHandler(e) {
 function startGame() {
   document.addEventListener('keydown', keyDownHandler, false);
   document.addEventListener('keyup', keyUpHandler, false);
-  draw();
+  canvas.addEventListener('click', function(e) { // Add click event listener to canvas
+    if (gameEnded) {
+      const rect = canvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      if (mouseX >= 0 && mouseX <= canvas.width && mouseY >= 0 && mouseY <= canvas.height) {
+        resetGame();
+        draw();
+        ball.speedX = originalBall.speedX; // Reset ball speed
+        ball.speedY = originalBall.speedY; // Reset ball speed
+        speedIncreaseInterval = setInterval(function() { // Start the speed increase interval
+          ball.speedX *= speedIncreaseFactor;
+          ball.speedY *= speedIncreaseFactor;
+        }, 1000);
+      }
+    }
+  });
+  canvas.addEventListener('touchstart', function(e) { // Add touchstart event listener to canvas
+    const touchY = e.touches[0].clientY; // Get the y-coordinate of the touch
+    if (touchY >= paddleLeftY && touchY <= paddleLeftY + paddleHeight) { // Check if touch is within the bounds of the left paddle
+      touchStartY = touchY; // Store the initial touch position
+    }
+  });
+  canvas.addEventListener('touchmove', function(e) { // Add touchmove event listener to canvas
+    const touchY = e.touches[0].clientY; // Get the y-coordinate of the touch
+    const deltaY = touchY - touchStartY; // Calculate the change in touch position
+    if (Math.abs(deltaY) >= touchDragThreshold) { // Check if touch movement exceeds the threshold
+      if (deltaY < 0 && paddleLeftY > 0) { // Move paddle up if touch moves upwards and paddle is within bounds
+        paddleLeftY -= maxPaddleSpeed;
+      } else if (deltaY > 0 && paddleLeftY < canvas.height - paddleHeight) { // Move paddle down if touch moves downwards and paddle is within bounds
+        paddleLeftY += maxPaddleSpeed;
+      }
+      touchStartY = touchY; // Update the initial touch position
+    }
+  });
+
+  // Start the countdown when the button is clicked
+  const startButton = document.getElementById('startButton');
+  startButton.addEventListener('click', function() {
+    countdown(3, function() {
+      countdownInProgress = false;
+      draw();
+    });
+  });
 }
 
 function updateBotPaddle() {
@@ -162,4 +221,76 @@ function updateBotPaddle() {
   }
 }
 
+// Countdown function to animate countdown before starting the game
+function countdown(seconds, callback) {
+  let count = seconds;
+  countdownInProgress = true;
+  const countdownInterval = setInterval(function() {
+    countdownValue = count;
+    if (count <= 0) {
+      clearInterval(countdownInterval);
+      countdownInProgress = false;
+      callback();
+    }
+    count--;
+  }, 1000);
+}
+
 startGame();
+function draw() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  
+  if (countdownInProgress) {
+    context.fillStyle = 'black';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = 'white';
+    context.font = '100px Arial';
+    context.fillText(countdownValue > 0 ? countdownValue : 'Go!', canvas.width / 2 - 50, canvas.height / 2 + 50);
+  } else {
+    drawBall();
+    drawPaddles();
+    drawScores();
+  }
+
+  if (gameEnded) {
+    context.fillStyle = 'white';
+    context.font = '30px Arial';
+    context.fillText('Game Over!', canvas.width / 2 - 100, canvas.height / 2);
+    context.fillText('Click anywhere to restart', canvas.width / 2 - 150, canvas.height / 2 + 40);
+    clearInterval(speedIncreaseInterval); // Stop the speed increase interval
+    return;
+  }
+
+  if (!countdownInProgress) {
+    if (upPressed && paddleLeftY > 0) {
+      paddleLeftY -= maxPaddleSpeed;
+    } else if (downPressed && paddleLeftY < canvas.height - paddleHeight) {
+      paddleLeftY += maxPaddleSpeed;
+    }
+
+    updateBotPaddle();
+
+    ball.x += ball.speedX;
+    ball.y += ball.speedY;
+
+    if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+      ball.speedY = -ball.speedY * (Math.random() * 0.4 + 0.8);
+    }
+
+    if (ball.x - ball.radius < paddleWidth && ball.y > paddleLeftY && ball.y < paddleLeftY + paddleHeight) {
+      ball.speedX = -ball.speedX;
+      player1Score++;
+    } else if (ball.x + ball.radius > canvas.width - paddleWidth && ball.y > paddleRightY && ball.y < paddleRightY + paddleHeight) {
+      ball.speedX = -ball.speedX;
+      botScore++;
+    } else if (ball.x - ball.radius < 0) {
+      endGame();
+      botWins++; // Increment bot wins
+    } else if (ball.x + ball.radius > canvas.width) {
+      endGame();
+      player1Wins++; // Increment player 1 wins
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
