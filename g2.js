@@ -111,9 +111,6 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
-// Update the checkWinner function to correctly update the victory counters
-// Update the checkWinner function to correctly update the victory counters
-// Update the checkWinner function to correctly update the victory counters
 function checkWinner() {
   if (player1Score >= 5) {
     if (ball.x < canvas.width / 2) {
@@ -131,7 +128,6 @@ function checkWinner() {
     endGame();
   }
 }
-
 
 function endGame() {
   gameEnded = true;
