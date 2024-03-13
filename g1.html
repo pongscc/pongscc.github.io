@@ -35,11 +35,28 @@
     background-color: #fff;
     color: #333;
   }
+  .start-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .start-button:hover {
+    background-color: #fff;
+    color: #333;
+  }
 </style>
 </head>
 <body>
 <canvas id="pongCanvas" width="800" height="400"></canvas>
 <button class="back-button" onclick="window.location.href='index.html'">Back</button>
+<button class="start-button" id="startButton">Start Game</button>
 <script src="g1.js"></script>
 </body>
 </html>
