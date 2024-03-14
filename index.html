@@ -1,74 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425"
-     crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pong Game</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #1A1A1A; /* Changed background color */
-    position: relative;
-    font-family: Arial, sans-serif;
-  }
-  canvas {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .container {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    color: #fff;
-  }
-  .animated-title {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    position: relative;
-    cursor: default;
-    letter-spacing: -0.05em; /* Adjust letter spacing */
-  }
-  .animated-title span {
-    display: inline-block;
-    transition: transform 0.3s ease, color 0.3s ease;
-  }
-  .animated-title span:hover {
-    color: #00f;
-    transform: scale(1.2);
-  }
-  .game-button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: 2px solid #fff;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-bottom: 10px;
-  }
-  .game-button:hover {
-    background-color: #fff;
-    color: #333;
-  }
-  .image{
-    width: 50px;
-    height: 50px;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425" crossorigin="anonymous"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #1A1A1A; /* Changed background color */
+            position: relative;
+            font-family: Arial, sans-serif;
+        }
+
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .animated-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            cursor: default;
+            letter-spacing: -0.05em; /* Adjust letter spacing */
+        }
+
+        .animated-title span {
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .animated-title span:hover {
+            color: #00f;
+            transform: scale(1.2);
+        }
+
+        .game-button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            background-color: transparent;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .game-button:hover {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .ad-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .ad-slot {
+            width: 45%;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425"
+    <!-- Left side ad -->
+    <div class="ad-container">
+        <div class="ad-slot">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-4931886961504425"
+                data-ad-slot="LEFT_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425"
      crossorigin="anonymous"></script>
 <!-- side -->
 <ins class="adsbygoogle"
@@ -80,36 +104,53 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<canvas id="canvas"></canvas>
-<div class="container">
-  <h1 class="animated-title">
-    <span>W</span>
-    <span>e</span>
-    <span>l</span>
-    <span>c</span>
-    <span>o</span>
-    <span>m</span>
-    <span>e</span>
-    <span> </span>
-    <span>t</span>
-    <span>o</span>
-    <span> </span>
-    <span>P</span>
-    <span>o</span>
-    <span>n</span>
-    <span>g</span>
-    <span> </span>
-    <span>G</span>
-    <span>a</span>
-    <span>m</span>
-    <span>e</span>
-  </h1>
-  <img class="image" src="LOGO PONG.jpg" /> </a>
-  <button onclick="window.location.href='g1.html'" class="game-button">G1 (Single Player)</button>
-  <button onclick="window.location.href='g2.html'" class="game-button">G2 (Two Players)</button>
-</div>
-<script>
-  const canvas = document.getElementById('canvas');
+        </div>
+
+        <!-- Main content -->
+        <canvas id="canvas"></canvas>
+        <div class="container">
+            <h1 class="animated-title">
+                <span>W</span>
+                <span>e</span>
+                <span>l</span>
+                <span>c</span>
+                <span>o</span>
+                <span>m</span>
+                <span>e</span>
+                <span> </span>
+                <span>t</span>
+                <span>o</span>
+                <span> </span>
+                <span>P</span>
+                <span>o</span>
+                <span>n</span>
+                <span>g</span>
+                <span> </span>
+                <span>G</span>
+                <span>a</span>
+                <span>m</span>
+                <span>e</span>
+            </h1>
+            <!-- Additional content or buttons here -->
+        </div>
+
+        <!-- Right side ad -->
+        <div class="ad-slot">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-4931886961504425"
+                data-ad-slot="RIGHT_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- Your existing scripts here -->
+    <script>
+       const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
   const balls = [];
   let ballSize = 20; // Initial size of balls
@@ -229,6 +270,6 @@
     }
   });
 
-</script>
+    </script>
 </body>
 </html>
