@@ -21,13 +21,12 @@
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-    animation: pulseColor 2s infinite alternate, changeColor 5s infinite;
   }
 
   h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    animation: perspectiveEffect 2s infinite alternate;
+    animation: perspectiveEffect 1s infinite alternate, pulse 0.5s infinite alternate;
   }
 
   .game-button {
@@ -49,7 +48,8 @@
 
   .about-section {
     padding: 30px;
-    margin-top: 150px;
+    margin-top: 50px;
+    animation: changeColor 5s infinite;
   }
 
   .star {
@@ -81,12 +81,12 @@
     }
   }
 
-  @keyframes pulseColor {
+  @keyframes pulse {
     0% {
       transform: scale(1);
     }
     100% {
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
   }
 
@@ -118,7 +118,7 @@
 
   <!-- About Us section -->
   <div class="about-section" id="about">
-    <h2>About Us</h2>
+    <h2 style="animation: changeColor 5s infinite;">About Us</h2>
     <p>Pong Game is a classic arcade game that simulates table tennis. Players control paddles and try to hit the ball past the opponent's paddle. It's a simple yet addictive game that tests your reflexes and strategy.</p>
     <p>Key Features:</p>
     <ul>
