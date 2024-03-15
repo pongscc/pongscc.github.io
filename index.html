@@ -10,241 +10,93 @@
   body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #000; /* Changed background color */
-    position: relative;
+    overflow: auto;
     font-family: Arial, sans-serif;
-    background: url('https://media.giphy.com/media/7u6BIvhhnhk3u/giphy.gif'); /* Animated stars background */
-    background-size: cover;
-    animation: star-animation 20s infinite alternate; /* Animation for stars */
-  }
-  
-  @keyframes star-animation {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 0 100%;
-    }
+    background-color: #f8f9fa; /* Light gray background */
+    color: #333; /* Dark text color */
   }
 
-  canvas {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
   .container {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
   }
-  .animated-title {
-    font-size: 3rem;
+
+  h1 {
+    font-size: 2.5rem;
     margin-bottom: 20px;
-    position: relative;
-    cursor: default;
-    letter-spacing: -0.05em; /* Adjust letter spacing */
+    text-align: center;
   }
-  .animated-title span {
-    display: inline-block;
-    transition: transform 0.3s ease, color 0.3s ease;
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
   }
-  .animated-title span:hover {
-    color: #00f;
-    transform: scale(1.2);
+
+  .image {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100%;
+    height: auto;
   }
+
   .game-button {
-    padding: 10px 20px;
+    display: block;
+    width: 100%;
+    padding: 10px;
     font-size: 1.2rem;
-    border: 2px solid #fff;
+    border: 2px solid #007bff; /* Blue border */
     border-radius: 5px;
-    background-color: transparent;
+    background-color: #007bff; /* Blue background */
     color: #fff;
-    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin-bottom: 10px;
   }
+
   .game-button:hover {
-    background-color: #fff;
-    color: #333;
+    background-color: #0056b3; /* Darker shade on hover */
+    border-color: #0056b3; /* Darker shade on hover */
   }
-  .image{
-    width: 100px; /* Increased image size */
-    height: 100px; /* Increased image size */
-    margin-bottom: 20px; /* Added space after image */
+
+  .about-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
   }
 </style>
 </head>
 <body>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425"
-     crossorigin="anonymous"></script>
-<!-- side -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4931886961504425"
-     data-ad-slot="6193324862"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<canvas id="canvas"></canvas>
-<div class="container">
-  <h1 class="animated-title">
-    <span>W</span>
-    <span>e</span>
-    <span>l</span>
-    <span>c</span>
-    <span>o</span>
-    <span>m</span>
-    <span>e</span>
-    <span> </span>
-    <span>t</span>
-    <span>o</span>
-    <span> </span>
-    <span>P</span>
-    <span>o</span>
-    <span>n</span>
-    <span>g</span>
-    <span> </span>
-    <span>G</span>
-    <span>a</span>
-    <span>m</span>
-    <span>e</span>
-  </h1>
-  <img class="image" src="LOGO_PONG.jpg" alt="Pong Game Logo"/> <!-- Changed image source and added alt attribute -->
-  <p>This is a classic Pong game where players control paddles and try to hit the ball past the opponent's paddle. It's a simple yet addictive game that tests your reflexes and strategy.</p>
-  <!-- Added content about the game -->
-  <button onclick="window.location.href='g1.html'" class="game-button">G1 (Single Player)</button>
-  <button onclick="window.location.href='g2.html'" class="game-button">G2 (Two Players)</button>
-</div>
-<script>
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  const balls = [];
-  let ballSize = 20; // Initial size of balls
-  let textSize = 3; // Initial size of text
-  const gravity = 0.1; // Adjust gravity
-  const friction = 0.99;
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  class Ball {
-    constructor(x, y, radius) {
-      this.x = x;
-      this.y = y;
-      this.radius = radius;
-      this.color = "#fff";
-      this.dx = (Math.random() - 0.5) * 2; // Adjust velocity
-      this.dy = (Math.random() - 0.5) * 2; // Adjust velocity
-      this.dragging = false;
-    }
-
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.closePath();
-    }
-
-    update() {
-      if (!this.dragging) {
-        this.dy += gravity;
-        this.dx *= friction;
-        this.dy *= friction;
-        this.x += this.dx;
-        this.y += this.dy;
-
-        // Bounce off the walls
-        if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
-          this.dx *= -1;
-        }
-        if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
-          this.dy *= -1;
-        }
-
-        // Limit movement within canvas boundaries
-        if (this.x + this.radius > canvas.width) {
-          this.x = canvas.width - this.radius;
-        } else if (this.x - this.radius < 0) {
-          this.x = this.radius;
-        }
-        if (this.y + this.radius > canvas.height) {
-          this.y = canvas.height - this.radius;
-        } else if (this.y - this.radius < 0) {
-          this.y = this.radius;
-        }
-
-        // Check collision with other balls
-        for (let i = 0; i < balls.length; i++) {
-          if (balls[i] !== this) {
-            const distance = Math.sqrt(Math.pow(this.x - balls[i].x, 2) + Math.pow(this.y - balls[i].y, 2));
-            if (distance < this.radius + balls[i].radius) {
-              // Collision detected, adjust velocities
-              const angle = Math.atan2(balls[i].y - this.y, balls[i].x - this.x);
-              const targetX = this.x + Math.cos(angle) * (this.radius + balls[i].radius);
-              const targetY = this.y + Math.sin(angle) * (this.radius + balls[i].radius);
-              const ax = (targetX - balls[i].x) * 0.05;
-              const ay = (targetY - balls[i].y) * 0.05;
-              this.dx -= ax;
-              this.dy -= ay;
-              balls[i].dx += ax;
-              balls[i].dy += ay;
-            }
-          }
-        }
-      }
-
-      this.draw();
-    }
-  }
-
-  function animate() {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    balls.forEach(ball => {
-      ball.update();
-    });
-  }
-
-  function init() {
-    for (let i = 0; i < 10; i++) {
-      const radius = Math.random() * ballSize + ballSize / 2;
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      balls.push(new Ball(x, y, radius));
-    }
-  }
-
-  init();
-  animate();
-
-  // Event listener for Ctrl + scroll to change ball and text size
-  window.addEventListener('wheel', (e) => {
-    if (e.ctrlKey) {
-      e.preventDefault();
-      ballSize += e.deltaY * -0.1;
-      textSize += e.deltaY * -0.005;
-      ballSize = Math.max(5, ballSize); // Minimum ball size
-      textSize = Math.max(1, textSize); // Minimum text size
-      balls.forEach(ball => {
-        ball.radius = Math.random() * ballSize + ballSize / 2;
-      });
-      document.querySelectorAll('.animated-title span').forEach(span => {
-        span.style.fontSize = `${textSize}rem`;
-      });
-    }
-  });
-
-</script>
+  <div class="container">
+    <h1>Welcome to Pong Game</h1>
+    <img class="image" src="LOGO_PONG.jpg" alt="Pong Game Logo"/>
+    <div class="about-section">
+      <h2>About Us</h2>
+      <p>Pong Game is a classic arcade game that simulates table tennis. Players control paddles and try to hit the ball past the opponent's paddle. It's a simple yet addictive game that tests your reflexes and strategy.</p>
+      <p>Key Features:</p>
+      <ul>
+        <li>Single-player and two-player modes</li>
+        <li>Adjustable ball and text size</li>
+        <li>Realistic physics simulation</li>
+      </ul>
+      <p>Experience the nostalgia of the retro arcade era with Pong Game!</p>
+    </div>
+    <a href="g1.html" class="game-button">Play Single Player</a>
+    <a href="g2.html" class="game-button">Play Two Players</a>
+    <!-- Google Ad Code -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4931886961504425"
+         data-ad-slot="6193324862"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 </body>
 </html>
