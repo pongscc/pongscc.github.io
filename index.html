@@ -11,94 +11,65 @@
     margin: 0;
     padding: 0;
     overflow: auto;
-    font-family: Arial, sans-serif;
-    background-color: #000; /* Black background */
-    color: #fff; /* White text color */
+    font-family: 'Press Start 2P', cursive;
+    background-color: #000;
+    color: #fff;
   }
 
   .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    text-align: center;
   }
 
   h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    text-align: center;
-    animation: fadeInDown 1s ease; /* Smooth fade-in animation */
   }
 
   .game-button {
-    display: block;
-    width: 100%;
-    padding: 15px;
+    display: inline-block;
+    padding: 10px 20px;
     font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #444; /* Dark gray background */
+    border: 5px solid #fff; /* Thick white border */
+    background-color: #000;
     color: #fff;
-    text-align: center;
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin-bottom: 20px;
-    animation: fadeInDown 1s ease; /* Smooth fade-in animation */
   }
 
   .game-button:hover {
-    background-color: #666; /* Darker shade on hover */
+    background-color: #fff;
+    color: #000; /* Black text on hover */
   }
 
   .about-section {
-    display: none;
     background-color: #fff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 50px; /* Added margin to push it down */
-    animation: fadeInUp 1s ease; /* Smooth fade-in animation */
+    margin-top: 50px;
   }
 
-  @keyframes fadeInDown {
+  .star {
+    position: fixed;
+    background-color: #fff;
+    width: 2px;
+    height: 2px;
+    animation: twinkle 1s infinite;
+  }
+
+  @keyframes twinkle {
     0% {
+      opacity: 1;
+    }
+    50% {
       opacity: 0;
-      transform: translateY(-20px);
     }
     100% {
       opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .about-title {
-    font-size: 1.8rem;
-    text-align: center;
-    animation: colorChange 5s infinite alternate; /* Color-changing animation */
-  }
-
-  @keyframes colorChange {
-    0% {
-      color: #f00; /* Red */
-    }
-    33% {
-      color: #0f0; /* Green */
-    }
-    66% {
-      color: #00f; /* Blue */
-    }
-    100% {
-      color: #f00; /* Red */
     }
   }
 </style>
@@ -106,37 +77,38 @@
 <body>
   <div class="container">
     <h1>Welcome to Pong Game</h1>
-    <a href="g1.html" class="game-button">Play Single Player</a>
-    <a href="g2.html" class="game-button">Play Two Players</a>
-    <div class="about-section" id="about-section">
-      <h2 class="about-title">About Us</h2>
-      <p>Pong Game is a classic arcade game that simulates table tennis. Players control paddles and try to hit the ball past the opponent's paddle. It's a simple yet addictive game that tests your reflexes and strategy.</p>
-      <p>Key Features:</p>
-      <ul>
-        <li>Single-player and two-player modes</li>
-        <li>Adjustable ball and text size</li>
-        <li>Realistic physics simulation</li>
-      </ul>
-      <p>Experience the nostalgia of the retro arcade era with Pong Game!</p>
-      <p>Major updates coming soon!</p>
-    </div>
-    <!-- Google Ad Code -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-4931886961504425"
-         data-ad-slot="6193324862"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+    <a href="#about" class="game-button">Play Single Player</a>
+    <a href="#about" class="game-button">Play Two Players</a>
   </div>
 
-  <!-- White square shining stars in the background -->
-  <div id="stars"></div>
+  <!-- About Us section -->
+  <div class="about-section" id="about">
+    <h2>About Us</h2>
+    <p>Pong Game is a classic arcade game that simulates table tennis. Players control paddles and try to hit the ball past the opponent's paddle. It's a simple yet addictive game that tests your reflexes and strategy.</p>
+    <p>Key Features:</p>
+    <ul>
+      <li>Single-player and two-player modes</li>
+      <li>Adjustable ball and text size</li>
+      <li>Realistic physics simulation</li>
+    </ul>
+    <p>Experience the nostalgia of the retro arcade era with Pong Game!</p>
+    <p>Stay tuned for major updates coming soon!</p>
+  </div>
+
+  <!-- Google Ad Code -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4931886961504425"
+       data-ad-slot="6193324862"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
   <script>
-    const stars = document.getElementById('stars');
-    const numStars = 50;
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  <!-- Stars background -->
+  <script>
+    const numStars = 100;
     for (let i = 0; i < numStars; i++) {
       const star = document.createElement('div');
       star.className = 'star';
@@ -147,33 +119,11 @@
       star.style.top = `${Math.random() * 100}vh`;
       star.style.animationDuration = `${duration}s`;
       star.style.animationDelay = `${delay}s`;
-      star.style.width = `${Math.random() * 2}px`;
-      star.style.height = star.style.width;
-      stars.appendChild(star);
+      document.body.appendChild(star);
     }
   </script>
 
-  <!-- Smooth scrolling to About section -->
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
-
-  <!-- Show About section on scroll -->
-  <script>
-    window.addEventListener('scroll', () => {
-      const aboutSection = document.getElementById('about-section');
-      if (window.scrollY > 200) {
-        aboutSection.style.display = 'block';
-      }
-    });
-  </script>
+  <!-- Google Font for 8-bit style -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 </body>
 </html>
