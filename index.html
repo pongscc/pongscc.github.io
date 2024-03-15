@@ -21,12 +21,13 @@
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-    animation: dropDown 1s ease; /* Drop-down animation */
+    animation: pulseColor 2s infinite alternate, changeColor 5s infinite;
   }
 
   h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
+    animation: perspectiveEffect 2s infinite alternate;
   }
 
   .game-button {
@@ -39,7 +40,6 @@
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin-bottom: 20px;
-    animation: dropDown 1s ease; /* Drop-down animation */
   }
 
   .game-button:hover {
@@ -48,11 +48,8 @@
   }
 
   .about-section {
-    background-color: #fff;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
+    margin-top: 150px;
   }
 
   .star {
@@ -75,14 +72,39 @@
     }
   }
 
-  @keyframes dropDown {
+  @keyframes perspectiveEffect {
     0% {
-      transform: translateY(-50px); /* Start above */
-      opacity: 0;
+      transform: perspective(100px) translateY(0);
     }
     100% {
-      transform: translateY(0); /* Drop down */
-      opacity: 1;
+      transform: perspective(100px) translateY(20px);
+    }
+  }
+
+  @keyframes pulseColor {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes changeColor {
+    0% {
+      color: #fff;
+    }
+    25% {
+      color: #ffcc00;
+    }
+    50% {
+      color: #00ff00;
+    }
+    75% {
+      color: #0000ff;
+    }
+    100% {
+      color: #ff0000;
     }
   }
 </style>
@@ -103,15 +125,14 @@
       <li>Single-player and two-player modes</li>
       <li>Adjustable ball and text size</li>
       <li>Realistic physics simulation</li>
-      <li>Responsive design for optimal gameplay on all devices</li>
-      <li>Leaderboard to track your high scores</li>
-      <li>Customizable paddle and ball designs</li>
     </ul>
     <p>Experience the nostalgia of the retro arcade era with Pong Game!</p>
-    <p>Stay tuned for major updates coming soon, including new game modes, additional customization options, and more!</p>
+    <p>Stay tuned for major updates coming soon!</p>
+    <p>Our team is dedicated to providing the best gaming experience. We're constantly working on improvements and new features to enhance your gameplay. Have suggestions or feedback? Feel free to reach out to us!</p>
   </div>
 
   <!-- Google Ad Code -->
+  <div style="height: 250px; /* Space for ads */"></div>
   <ins class="adsbygoogle"
        style="display:block"
        data-ad-client="ca-pub-4931886961504425"
