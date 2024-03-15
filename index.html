@@ -21,6 +21,7 @@
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+    animation: dropDown 1s ease; /* Drop-down animation */
   }
 
   h1 {
@@ -38,6 +39,7 @@
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
     margin-bottom: 20px;
+    animation: dropDown 1s ease; /* Drop-down animation */
   }
 
   .game-button:hover {
@@ -72,6 +74,17 @@
       opacity: 1;
     }
   }
+
+  @keyframes dropDown {
+    0% {
+      transform: translateY(-50px); /* Start above */
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0); /* Drop down */
+      opacity: 1;
+    }
+  }
 </style>
 </head>
 <body>
@@ -90,9 +103,12 @@
       <li>Single-player and two-player modes</li>
       <li>Adjustable ball and text size</li>
       <li>Realistic physics simulation</li>
+      <li>Responsive design for optimal gameplay on all devices</li>
+      <li>Leaderboard to track your high scores</li>
+      <li>Customizable paddle and ball designs</li>
     </ul>
     <p>Experience the nostalgia of the retro arcade era with Pong Game!</p>
-    <p>Stay tuned for major updates coming soon!</p>
+    <p>Stay tuned for major updates coming soon, including new game modes, additional customization options, and more!</p>
   </div>
 
   <!-- Google Ad Code -->
