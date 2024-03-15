@@ -11,10 +11,23 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #1A1A1A; /* Changed background color */
+    background-color: #000; /* Changed background color */
     position: relative;
     font-family: Arial, sans-serif;
+    background: url('https://media.giphy.com/media/7u6BIvhhnhk3u/giphy.gif'); /* Animated stars background */
+    background-size: cover;
+    animation: star-animation 20s infinite alternate; /* Animation for stars */
   }
+  
+  @keyframes star-animation {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 100%;
+    }
+  }
+
   canvas {
     display: block;
     position: absolute;
@@ -62,8 +75,9 @@
     color: #333;
   }
   .image{
-    width: 50px;
-    height: 50px;
+    width: 100px; /* Increased image size */
+    height: 100px; /* Increased image size */
+    margin-bottom: 20px; /* Added space after image */
   }
 </style>
 </head>
@@ -104,7 +118,9 @@
     <span>m</span>
     <span>e</span>
   </h1>
-  <img class="image" src="LOGO PONG.jpg" /> </a>
+  <img class="image" src="LOGO_PONG.jpg" alt="Pong Game Logo"/> <!-- Changed image source and added alt attribute -->
+  <p>This is a classic Pong game where players control paddles and try to hit the ball past the opponent's paddle. It's a simple yet addictive game that tests your reflexes and strategy.</p>
+  <!-- Added content about the game -->
   <button onclick="window.location.href='g1.html'" class="game-button">G1 (Single Player)</button>
   <button onclick="window.location.href='g2.html'" class="game-button">G2 (Two Players)</button>
 </div>
