@@ -12,8 +12,8 @@
     padding: 0;
     overflow: auto;
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa; /* Light gray background */
-    color: #333; /* Dark text color */
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
   }
 
   .container {
@@ -26,56 +26,90 @@
     font-size: 2.5rem;
     margin-bottom: 20px;
     text-align: center;
-  }
-
-  p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .image {
-    display: block;
-    margin: 0 auto 20px;
-    max-width: 100%;
-    height: auto;
+    animation: fadeInDown 1s ease; /* Smooth fade-in animation */
   }
 
   .game-button {
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     font-size: 1.2rem;
-    border: 2px solid #007bff; /* Blue border */
+    border: none;
     border-radius: 5px;
-    background-color: #007bff; /* Blue background */
+    background-color: #444; /* Dark gray background */
     color: #fff;
     text-align: center;
     text-decoration: none;
     transition: background-color 0.3s ease, color 0.3s ease;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease; /* Smooth fade-in animation */
   }
 
   .game-button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
-    border-color: #0056b3; /* Darker shade on hover */
+    background-color: #666; /* Darker shade on hover */
   }
 
   .about-section {
+    display: none;
     background-color: #fff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+    margin-top: 50px; /* Added margin to push it down */
+    animation: fadeInUp 1s ease; /* Smooth fade-in animation */
+  }
+
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .about-title {
+    font-size: 1.8rem;
+    text-align: center;
+    animation: colorChange 5s infinite alternate; /* Color-changing animation */
+  }
+
+  @keyframes colorChange {
+    0% {
+      color: #f00; /* Red */
+    }
+    33% {
+      color: #0f0; /* Green */
+    }
+    66% {
+      color: #00f; /* Blue */
+    }
+    100% {
+      color: #f00; /* Red */
+    }
   }
 </style>
 </head>
 <body>
   <div class="container">
     <h1>Welcome to Pong Game</h1>
-    <img class="image" src="LOGO_PONG.jpg" alt="Pong Game Logo"/>
-    <div class="about-section">
-      <h2>About Us</h2>
+    <a href="g1.html" class="game-button">Play Single Player</a>
+    <a href="g2.html" class="game-button">Play Two Players</a>
+    <div class="about-section" id="about-section">
+      <h2 class="about-title">About Us</h2>
       <p>Pong Game is a classic arcade game that simulates table tennis. Players control paddles and try to hit the ball past the opponent's paddle. It's a simple yet addictive game that tests your reflexes and strategy.</p>
       <p>Key Features:</p>
       <ul>
@@ -84,9 +118,8 @@
         <li>Realistic physics simulation</li>
       </ul>
       <p>Experience the nostalgia of the retro arcade era with Pong Game!</p>
+      <p>Major updates coming soon!</p>
     </div>
-    <a href="g1.html" class="game-button">Play Single Player</a>
-    <a href="g2.html" class="game-button">Play Two Players</a>
     <!-- Google Ad Code -->
     <ins class="adsbygoogle"
          style="display:block"
@@ -98,5 +131,49 @@
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
   </div>
+
+  <!-- White square shining stars in the background -->
+  <div id="stars"></div>
+  <script>
+    const stars = document.getElementById('stars');
+    const numStars = 50;
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const xy = Math.random() * 100;
+      const duration = Math.random() * 1 + 0.5;
+      const delay = Math.random() * 5;
+      star.style.left = `${Math.random() * 100}vw`;
+      star.style.top = `${Math.random() * 100}vh`;
+      star.style.animationDuration = `${duration}s`;
+      star.style.animationDelay = `${delay}s`;
+      star.style.width = `${Math.random() * 2}px`;
+      star.style.height = star.style.width;
+      stars.appendChild(star);
+    }
+  </script>
+
+  <!-- Smooth scrolling to About section -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+
+  <!-- Show About section on scroll -->
+  <script>
+    window.addEventListener('scroll', () => {
+      const aboutSection = document.getElementById('about-section');
+      if (window.scrollY > 200) {
+        aboutSection.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
