@@ -13,14 +13,16 @@
     padding: 0;
     overflow: hidden;
     background-color: #1A1A1A; /* Changed background color */
-    font-family: Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive;
   }
-  #pongCanvas {
+
+  canvas {
     display: block;
     margin: auto;
     background-color: #000; /* Canvas background color */
     border: 2px solid #fff; /* Canvas border */
   }
+
   .back-button {
     display: block;
     margin: 20px auto;
@@ -33,14 +35,17 @@
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
+
   .back-button:hover {
     background-color: #fff;
     color: #333;
   }
+
   .control-buttons {
     text-align: center;
     margin-top: 20px;
   }
+
   .control-buttons button {
     margin: 0 10px;
     padding: 10px 20px;
@@ -52,314 +57,79 @@
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
+
   .control-buttons button:hover {
     background-color: #fff;
     color: #333;
+  }
+
+  .star {
+    position: fixed;
+    background-color: #fff;
+    width: 2px;
+    height: 2px;
+    animation: twinkle 1s infinite;
+  }
+
+  @keyframes twinkle {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 </style>
 </head>
 <body>
   <header>
-    <h1> Free Online Pong Game! </h1>
+    <h1>Free Online Pong Game!</h1>
   </header>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425"
-     crossorigin="anonymous"></script>
-<!-- side -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4931886961504425"
-     data-ad-slot="6193324862"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<canvas id="pongCanvas" width="800" height="400"></canvas>
-<div class="control-buttons">
-  <button id="start-game-btn">Start Game</button>
-</div>
-<button class="back-button" onclick="window.location.href='index.html'">Back</button>
-<script src="g2.js"></script>
-<script>
-const canvas = document.getElementById('pongCanvas');
-const context = canvas.getContext('2d');
 
-let ball = {
-  x: canvas.width / 2,
-  y: canvas.height / 2,
-  radius: 10,
-  speedX: 3,
-  speedY: 3
-};
+  <!-- Google Ad Code -->
+  <div style="height: 250px; /* Space for ads */"></div>
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-4931886961504425"
+       data-ad-slot="6193324862"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
 
-const originalBall = { ...ball };
+  <!-- Pong Canvas -->
+  <canvas id="pongCanvas" width="800" height="400"></canvas>
 
-const paddleHeight = 100;
-const paddleWidth = 10;
-const paddleSpeed = 5;
+  <!-- Control Buttons -->
+  <div class="control-buttons">
+    <button id="start-game-btn">Start Game</button>
+  </div>
 
-let paddleLeftY = (canvas.height - paddleHeight) / 2;
-let paddleRightY = (canvas.height - paddleHeight) / 2;
+  <!-- Back Button -->
+  <button class="back-button" onclick="window.location.href='index.html'">Back</button>
 
-let touchStartLeftY = 0;
-let touchStartRightY = 0;
-let touchCurrentLeftY = 0;
-let touchCurrentRightY = 0;
-
-let touchMoveLeft = false;
-let touchMoveRight = false;
-
-let wPressed = false;
-let sPressed = false;
-let upPressed = false;
-let downPressed = false;
-
-let singlePlayer = false;
-let score = 0;
-let highScore = 0;
-let player1Score = 0;
-let player2Score = 0;
-let player1Wins = 0;
-let player2Wins = 0;
-let gameEnded = false;
-
-const speedIncreasePercentage = 5;
-const speedIncreaseFactor = 1 + speedIncreasePercentage / 100;
-
-// Function to draw the ball
-function drawBall() {
-  context.beginPath();
-  context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-  context.fillStyle = 'white';
-  context.fill();
-  context.closePath();
-}
-
-// Function to draw the paddles
-function drawPaddles() {
-  context.fillStyle = 'white';
-  context.fillRect(0, paddleLeftY, paddleWidth, paddleHeight);
-  context.fillRect(canvas.width - paddleWidth, paddleRightY, paddleWidth, paddleHeight);
-}
-
-// Function to draw the scores
-function drawScores() {
-  context.fillStyle = 'white';
-  context.font = '16px Arial';
-  context.fillText('Player 1: ' + player1Score + ' (Wins: ' + player1Wins + ')', 20, 20);
-  context.fillText('Player 2: ' + player2Score + ' (Wins: ' + player2Wins + ')', canvas.width - 200, 20);
-}
-
-// Function to draw the game elements
-function draw() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  drawBall();
-  drawPaddles();
-  drawScores();
-
-  if (gameEnded) {
-    context.fillStyle = 'white';
-    context.font = '30px Arial';
-    context.fillText('Game Over!', canvas.width / 2 - 100, canvas.height / 2);
-    context.fillText('Click anywhere to restart', canvas.width / 2 - 150, canvas.height / 2 + 40);
-    return;
-  }
-
-  // Moving the paddles based on touch events
-  if (touchMoveLeft) {
-    if (touchCurrentLeftY >= 0 && touchCurrentLeftY <= canvas.height - paddleHeight) {
-      paddleLeftY = touchCurrentLeftY;
+  <!-- Stars Background -->
+  <script>
+    const numStars = 100;
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const xy = Math.random() * 100;
+      const duration = Math.random() * 1 + 0.5;
+      const delay = Math.random() * 5;
+      star.style.left = `${Math.random() * 100}vw`;
+      star.style.top = `${Math.random() * 100}vh`;
+      star.style.animationDuration = `${duration}s`;
+      star.style.animationDelay = `${delay}s`;
+      document.body.appendChild(star);
     }
-  }
+  </script>
 
-  if (touchMoveRight) {
-    if (touchCurrentRightY >= 0 && touchCurrentRightY <= canvas.height - paddleHeight) {
-      paddleRightY = touchCurrentRightY;
-    }
-  }
-
-  // Moving the paddles based on keyboard input
-  if (wPressed && paddleLeftY > 0) {
-    paddleLeftY -= paddleSpeed;
-  } else if (sPressed && paddleLeftY < canvas.height - paddleHeight) {
-    paddleLeftY += paddleSpeed;
-  }
-
-  if (upPressed && paddleRightY > 0) {
-    paddleRightY -= paddleSpeed;
-  } else if (downPressed && paddleRightY < canvas.height - paddleHeight) {
-    paddleRightY += paddleSpeed;
-  }
-
-  // Moving the ball
-  ball.x += ball.speedX;
-  ball.y += ball.speedY;
-
-  // Bouncing off the top and bottom walls
-  if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
-    ball.speedY = -ball.speedY * (Math.random() * 0.4 + 0.8);
-  }
-
-  // Paddle collisions and scoring
-  if (ball.x - ball.radius < paddleWidth && ball.y > paddleLeftY && ball.y < paddleLeftY + paddleHeight) {
-    ball.speedX = -ball.speedX;
-    score++;
-  } else if (ball.x + ball.radius > canvas.width - paddleWidth && ball.y > paddleRightY && ball.y < paddleRightY + paddleHeight) {
-    ball.speedX = -ball.speedX;
-    score++;
-  } else if (ball.x - ball.radius < 0) {
-    player2Score++;
-    checkWinner();
-  } else if (ball.x + ball.radius > canvas.width) {
-    player1Score++;
-    checkWinner();
-  }
-
-  // Updating the high score
-  if (score > highScore) {
-    highScore = score;
-  }
-
-  // Requesting animation frame for continuous rendering
-  requestAnimationFrame(draw);
-}
-
-// Checking for winner and ending the game
-function checkWinner() {
-  if (player1Score >= 5) {
-    if (ball.x < canvas.width / 2) {
-      player2Wins++; // Invert winners
-    } else {
-      player1Wins++; // Invert winners
-    }
-    endGame();
-  } else if (player2Score >= 5) {
-    if (ball.x > canvas.width / 2) {
-      player1Wins++; // Invert winners
-    } else {
-      player2Wins++; // Invert winners
-    }
-    endGame();
-  }
-}
-
-// Ending the game
-function endGame() {
-  gameEnded = true;
-}
-
-// Resetting the game
-function resetGame() {
-  ball = { ...originalBall };
-  ball.x = canvas.width / 2;
-  ball.y = canvas.height / 2;
-  paddleLeftY = (canvas.height - paddleHeight) / 2;
-  paddleRightY = (canvas.height - paddleHeight) / 2;
-  score = 0;
-  gameEnded = false;
-}
-
-// Starting the game and adding event listeners
-function startGame() {
-  resetGame();
-  draw();
-}
-
-// Handling touch events for paddle movement
-canvas.addEventListener('touchstart', function(e) {
-  e.preventDefault();
-  if (e.targetTouches.length === 1) {
-    const touchPositionLeft = e.targetTouches[0].clientY - canvas.getBoundingClientRect().top;
-    const touchPositionRight = e.targetTouches[0].clientY - canvas.getBoundingClientRect().top;
-    touchStartLeftY = touchPositionLeft - paddleLeftY;
-    touchStartRightY = touchPositionRight - paddleRightY;
-    if (e.targetTouches[0].clientX < canvas.width / 2) {
-      touchMoveLeft = true;
-      touchMoveRight = false; // Imposta touchMoveRight a falso se si muove verso sinistra
-    } else {
-      touchMoveRight = true;
-      touchMoveLeft = false; // Imposta touchMoveLeft a falso se si muove verso destra
-    }
-  }
-});
-
-canvas.addEventListener('touchmove', function(e) {
-  e.preventDefault();
-  if (e.targetTouches.length === 1) {
-    const touchPositionLeft = e.targetTouches[0].clientY - canvas.getBoundingClientRect().top;
-    const touchPositionRight = e.targetTouches[0].clientY - canvas.getBoundingClientRect().top;
-    touchCurrentLeftY = touchPositionLeft - touchStartLeftY;
-    touchCurrentRightY = touchPositionRight - touchStartRightY;
-    if (touchMoveLeft) {
-      if (touchCurrentLeftY >= 0 && touchCurrentLeftY <= canvas.height - paddleHeight) {
-        paddleLeftY = touchCurrentLeftY;
-      }
-    }
-    if (touchMoveRight) {
-      if (touchCurrentRightY >= 0 && touchCurrentRightY <= canvas.height - paddleHeight) {
-        paddleRightY = touchCurrentRightY;
-      }
-    }
-  }
-});
-
-canvas.addEventListener('touchend', function(e) {
-  e.preventDefault();
-  touchStartLeftY = 0;
-  touchStartRightY = 0;
-  touchCurrentLeftY = 0;
-  touchCurrentRightY = 0;
-  touchMoveLeft = false;
-  touchMoveRight = false;
-});
-
-// Adding click event listener for restarting the game
-canvas.addEventListener('click', function(e) {
-  startGame(); // Restart the game
-});
-
-// Adding click event listener for starting the game
-document.getElementById('start-game-btn').addEventListener('click', function() {
-  startGame();
-});
-
-// Increasing ball speed periodically
-setInterval(function() {
-  ball.speedX *= speedIncreaseFactor;
-  ball.speedY *= speedIncreaseFactor;
-}, 1000);
-
-function keyDownHandler(e) {
-  if (e.key === 'w' || e.key === 'W') {
-    wPressed = true;
-    sPressed = false; // Assicurati che se W è premuto, S sia falso
-  } else if (e.key === 's' || e.key === 'S') {
-    sPressed = true;
-    wPressed = false; // Assicurati che se S è premuto, W sia falso
-  } else if (e.key === 'ArrowUp') {
-    upPressed = true;
-    downPressed = false; // Assicurati che se la freccia su è premuta, la freccia giù sia falsa
-  } else if (e.key === 'ArrowDown') {
-    downPressed = true;
-    upPressed = false; // Assicurati che se la freccia giù è premuta, la freccia su sia falsa
-  }
-}
-
-function keyUpHandler(e) {
-  if (e.key === 'w' || e.key === 'W') {
-    wPressed = false;
-  } else if (e.key === 's' || e.key === 'S') {
-    sPressed = false;
-  } else if (e.key === 'ArrowUp') {
-    upPressed = false;
-  } else if (e.key === 'ArrowDown') {
-    downPressed = false;
-  }
-}
-
-// Adding event listeners for keyboard controls
-document.addEventListener('keydown', keyDownHandler, false);
-document.addEventListener('keyup', keyUpHandler, false);
-</script>
+  <!-- Game Script -->
+  <script src="g2.js"></script>
 </body>
 </html>
