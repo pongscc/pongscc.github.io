@@ -101,18 +101,28 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
 <script>
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBK4INc_c6tHHM0fInh1Dr7gIAnhQU_iJ0",
-  authDomain: "pong-476cd.firebaseapp.com",
-  projectId: "pong-476cd",
-  storageBucket: "pong-476cd.appspot.com",
-  messagingSenderId: "419320846573",
-  appId: "1:419320846573:web:14c433559ac857f58354e4",
-  measurementId: "G-2JM72J286C"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDxZVWHk9WIklEn9YvTO67vvHEVszuHs3c",
+  authDomain: "pong-ddd66.firebaseapp.com",
+  databaseURL: "https://pong-ddd66-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "pong-ddd66",
+  storageBucket: "pong-ddd66.appspot.com",
+  messagingSenderId: "634792694408",
+  appId: "1:634792694408:web:3ae07daf901933915d453d",
+  measurementId: "G-34EF93QHJ4"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
   // Function to generate a random party code
 function generatePartyCode() {
