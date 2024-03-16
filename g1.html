@@ -108,7 +108,9 @@
 
   <!-- Control Buttons -->
   <div class="control-buttons">
-    <button id="start-game-btn">Start Game</button>
+    <button onclick="startGame('easy')">Easy</button>
+    <button onclick="startGame('medium')">Medium</button>
+    <button onclick="startGame('hard')">Hard</button>
   </div>
 
   <!-- Back Button -->
@@ -238,7 +240,13 @@ function draw() {
     paddleLeftY += maxPaddleSpeed;
   }
 
-  updateBotPaddle();
+  if (currentLevel === 'medium') {
+    updateBotPaddleMedium();
+  } else if (currentLevel === 'easy') {
+    updateBotPaddleEasy();
+  } else if (currentLevel === 'hard') {
+    updateBotPaddleHard();
+  }
 
   ball.x += ball.speedX;
   ball.y += ball.speedY;
@@ -308,7 +316,8 @@ function keyUpHandler(e) {
   }
 }
 
-function startGame() {
+function startGame(level) {
+  currentLevel = level;
   document.addEventListener('keydown', keyDownHandler, false);
   document.addEventListener('keyup', keyUpHandler, false);
   canvas.addEventListener('click', function(e) { // Add click event listener to canvas
@@ -350,25 +359,41 @@ function startGame() {
   });
 
   // Start the game immediately when the button is clicked
-  const startButton = document.getElementById('start-game-btn');
-  startButton.addEventListener('click', function() {
-    resetGame();
-    draw();
-    ball.speedX = originalBall.speedX; // Reset ball speed
-    ball.speedY = originalBall.speedY; // Reset ball speed
-    speedIncreaseInterval = setInterval(function() { // Start the speed increase interval
-      ball.speedX *= speedIncreaseFactor;
-      ball.speedY *= speedIncreaseFactor;
-    }, 1000);
-  });
+  resetGame();
+  draw();
+  ball.speedX = originalBall.speedX; // Reset ball speed
+  ball.speedY = originalBall.speedY; // Reset ball speed
+  speedIncreaseInterval = setInterval(function() { // Start the speed increase interval
+    ball.speedX *= speedIncreaseFactor;
+    ball.speedY *= speedIncreaseFactor;
+  }, 1000);
 }
 
-function updateBotPaddle() {
+function updateBotPaddleMedium() {
   // Move bot paddle to align with the ball's y-coordinate
-  if (ball.y < paddleRightY + paddleHeight / 2) {
+  if (ball.y < paddleRightY + paddleHeight / 3) {
     paddleRightY -= maxPaddleSpeed;
-  } else if (ball.y > paddleRightY + paddleHeight / 2) {
+  } else if (ball.y > paddleRightY + paddleHeight / 3) {
     paddleRightY += maxPaddleSpeed;
+  }
+}
+
+function updateBotPaddleEasy() {
+  // Move bot paddle to align with the ball's y-coordinate (slower and less precise movement)
+  if (ball.y < paddleRightY + paddleHeight / 2 && paddleRightY > 0) {
+    paddleRightY -= 2.8; // Rallenta il movimento del paddle in easy mode
+  } else if (ball.y > paddleRightY + paddleHeight / 2 && paddleRightY < canvas.height - paddleHeight) {
+    paddleRightY += 2.8; // Rallenta il movimento del paddle in easy mode
+  }
+}
+
+
+function updateBotPaddleHard() {
+  // Move bot paddle to align with the ball's y-coordinate (faster and more precise movement)
+  if (ball.y < paddleRightY + paddleHeight / 2 && paddleRightY > 0) {
+    paddleRightY -= maxPaddleSpeed + 1; // Aumenta la velocità del paddle in hard mode
+  } else if (ball.y > paddleRightY + paddleHeight / 2 && paddleRightY < canvas.height - paddleHeight) {
+    paddleRightY += maxPaddleSpeed + 1; // Aumenta la velocità del paddle in hard mode
   }
 }
 
@@ -387,64 +412,7 @@ function countdown(seconds, callback) {
   }, 1000);
 }
 
-startGame();
-function draw() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
- 
-  if (countdownInProgress) {
-    context.fillStyle = 'black';
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = 'white';
-    context.font = '100px Arial';
-    context.fillText(countdownValue > 0 ? countdownValue : 'Go!', canvas.width / 2 - 50, canvas.height / 2 + 50);
-  } else {
-    drawBall();
-    drawPaddles();
-    drawScores();
-  }
-
-  if (gameEnded) {
-    context.fillStyle = 'white';
-    context.font = '30px Arial';
-    context.fillText('Game Over!', canvas.width / 2 - 100, canvas.height / 2);
-    context.fillText('Click anywhere to restart', canvas.width / 2 - 150, canvas.height / 2 + 40);
-    clearInterval(speedIncreaseInterval); // Stop the speed increase interval
-    return;
-  }
-
-  if (!countdownInProgress) {
-    if (upPressed && paddleLeftY > 0) {
-      paddleLeftY -= maxPaddleSpeed;
-    } else if (downPressed && paddleLeftY < canvas.height - paddleHeight) {
-      paddleLeftY += maxPaddleSpeed;
-    }
-
-    updateBotPaddle();
-
-    ball.x += ball.speedX;
-    ball.y += ball.speedY;
-
-    if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
-      ball.speedY = -ball.speedY * (Math.random() * 0.4 + 0.8);
-    }
-
-    if (ball.x - ball.radius < paddleWidth && ball.y > paddleLeftY && ball.y < paddleLeftY + paddleHeight) {
-      ball.speedX = -ball.speedX;
-      player1Score++;
-    } else if (ball.x + ball.radius > canvas.width - paddleWidth && ball.y > paddleRightY && ball.y < paddleRightY + paddleHeight) {
-      ball.speedX = -ball.speedX;
-      botScore++;
-    } else if (ball.x - ball.radius < 0) {
-      endGame();
-      botWins++; // Increment bot wins
-    } else if (ball.x + ball.radius > canvas.width) {
-      endGame();
-      player1Wins++; // Increment player 1 wins
-    }
-  }
-
-  requestAnimationFrame(draw);
-}
+let currentLevel = 'medium'; // Default level is medium
   </script>
 </body>
 </html>
