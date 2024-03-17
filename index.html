@@ -1,131 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425"
-     crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pong Game</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-    font-family: 'Press Start 2P', cursive;
-    background-color: #000;
-    color: #fff;
-  }
-
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    animation: perspectiveEffect 1s infinite alternate, pulse 0.5s infinite alternate;
-  }
-
-  .game-button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: 5px solid #fff; /* Thick white border */
-    background-color: #000;
-    color: #fff;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-bottom: 20px;
-  }
-
-  .game-button:hover {
-    background-color: #fff;
-    color: #000; /* Black text on hover */
-  }
-
-  .about-section {
-    padding: 30px;
-    margin-top: 50px;
-    animation: changeColor 5s infinite;
-  }
-
-  .btn {
-	  animation: changeColor 5s infinite;
-  }
-
-  .star {
-    position: fixed;
-    background-color: #fff;
-    width: 2px;
-    height: 2px;
-    animation: twinkle 1s infinite;
-  }
-
-  @keyframes twinkle {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes perspectiveEffect {
-    0% {
-      transform: perspective(100px) translateY(0);
-    }
-    100% {
-      transform: perspective(100px) translateY(20px);
-    }
-  }
-
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(1.1);
-    }
-  }
-
-  @keyframes changeColor {
-    0% {
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pong Game</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+      font-family: 'Press Start 2P', cursive;
+      background-color: #000;
       color: #fff;
     }
-    25% {
-      color: #ffcc00;
+
+    .container {
+      max-width: 80%; /* Adjust as needed */
+      margin: 0 auto;
+      padding: 1em; /* Adjust as needed */
+      text-align: center;
     }
-    50% {
-      color: #00ff00;
+
+    h1 {
+      font-size: 4em; /* Adjust as needed */
+      margin-bottom: 20px;
+      animation: perspectiveEffect 1s infinite alternate, pulse 1.4s infinite alternate;
     }
-    75% {
-      color: #0000ff;
+
+    .game-button {
+      display: inline-block;
+      padding: 1em 2em; /* Adjust as needed */
+      font-size: 1em; /* Adjust as needed */
+      border: 0.2em solid #fff; /* Adjust as needed */
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-bottom: 20px;
     }
-    100% {
-      color: #ff0000;
+
+    .game-button:hover {
+      background-color: #fff;
+      color: #000;
     }
+
+    .about-container {
+  margin-top: 5%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.about-section {
+  border: 2px solid #fff;
+  padding: 20px;
+  background-color: #000; /* Optional: Add background color */
+}
+
+.about-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.about-section p,
+.about-section ul {
+  text-align: left;
+}
+
+.about-section ul {
+  padding-left: 20px;
+}
+
+.about-section p {
+  margin-bottom: 10px;
+}
+
+/* Mobile optimization */
+@media screen and (max-width: 768px) {
+  .about-container {
+    width: 100%;
+    padding: 0.5em;
   }
-</style>
+  .about-section h2 {
+    font-size: 1.5em;
+  }
+}
+
+
+
+    .btn {
+      animation: changeColor 5s infinite;
+    }
+
+    .star {
+      position: fixed;
+      background-color: #fff;
+      width: 0.2em; /* Adjust as needed */
+      height: 0.2em; /* Adjust as needed */
+      animation: twinkle 1s infinite;
+    }
+
+    @keyframes twinkle {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes perspectiveEffect {
+      0% {
+        transform: perspective(100px) translateY(0);
+      }
+      100% {
+        transform: perspective(100px) translateY(20px);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes changeColor {
+      0% {
+        color: #fff;
+      }
+      25% {
+        color: #ffcc00;
+      }
+      50% {
+        color: #00ff00;
+      }
+      75% {
+        color: #0000ff;
+      }
+      100% {
+        color: #ff0000;
+      }
+    }
+
+    .featured-games {
+      margin-top: 5%; /* Adjust as needed */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-info-container {
+      display: flex;
+      flex-wrap: nowrap;
+      transition: transform 0.5s ease;
+      padding: 1em; /* Adjust as needed */
+    }
+
+    .game-info {
+      margin: 0 1em; /* Adjust as needed */
+      border: 0.2em solid #fff; /* Adjust as needed */
+      width: 30%; /* Adjust as needed */
+      background-color: #000;
+      text-align: left;
+      padding: 1em; /* Adjust as needed */
+    }
+
+    .game-info img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .game-info h3 {
+      font-size: 1.5em; /* Adjust as needed */
+      margin: 1em 0 0.5em; /* Adjust as needed */
+      text-align: left;
+    }
+
+    .game-info p {
+      margin-bottom: 0.5em; /* Adjust as needed */
+      font-size: 1em; /* Adjust as needed */
+      text-align: left;
+    }
+
+    .game-info .game-button {
+      display: inline-block;
+      padding: 0.5em 1em; /* Adjust as needed */
+      font-size: 1em; /* Adjust as needed */
+      border: 0.1em solid #fff; /* Adjust as needed */
+      background-color: #000;
+      color: #fff;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      margin-top: 1em; /* Adjust as needed */
+    }
+
+    .game-info .game-button:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    .scroll-left,
+    .scroll-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #000;
+      color: #fff;
+      border: 0.2em solid #fff; /* Adjust as needed */
+      padding: 0.5em; /* Adjust as needed */
+      cursor: pointer;
+      z-index: 1;
+      font-size: 1.5em; /* Adjust as needed */
+    }
+
+    .scroll-left {
+      left: 1em; /* Adjust as needed */
+    }
+
+    .scroll-right {
+      right: 1em; /* Adjust as needed */
+    }
+
+    /* Mobile optimization */
+    @media screen and (max-width: 768px) {
+      .game-info {
+        width: 100%; /* Adjust as needed */
+        margin: 0 0 1em 0; /* Adjust as needed */
+      }
+      .scroll-left,
+      .scroll-right {
+        font-size: 1em; /* Adjust as needed */
+        padding: 0.3em; /* Adjust as needed */
+      }
+      h1 {
+        font-size: 1.5em; /* Adjust as needed */
+      }
+      .game-button {
+        font-size: 0.8em; /* Adjust as needed */
+        padding: 0.8em 1.5em; /* Adjust as needed */
+        margin-bottom: 1em; /* Adjust as needed */
+      }
+      .about-section,
+      .container {
+        padding: 0.5em; /* Adjust as needed */
+      }
+      .game-info h3 {
+        font-size: 1.2em; /* Adjust as needed */
+      }
+      .game-info p {
+        font-size: 0.8em; /* Adjust as needed */
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>Welcome to Pong Game</h1>
     <a href="g1.html" class="game-button">Play Single Player</a>
-    <a href="g2.html" class="game-button">Play Two Players</a></br>
-	<a href="online.html" class="game-button">Online(<span class="btn">Experimental!</span>)</a>
+    <a href="g2.html" class="game-button">Play Two Players</a><br>
+    <a href="online.html" class="game-button">Online(<span class="btn">Experimental!</span>)</a>
   </div>
 
   <!-- About Us section -->
+<div class="about-container">
   <div class="about-section" id="about">
-    <h2 style="animation: changeColor 5s infinite;">About Us</h2>
+    <h2>About Us</h2>
     <p>Pong Game is a classic arcade game that simulates table tennis. Players control paddles and try to hit the ball past the opponent's paddle. It's a simple yet addictive game that tests your reflexes and strategy.</p>
-    <p>Key Features:</p>
     <ul>
       <li>Single-player and two-player modes</li>
       <li>Adjustable ball and text size</li>
@@ -133,21 +280,115 @@
     </ul>
     <p>Experience the nostalgia of the retro arcade era with Pong Game!</p>
     <p>Stay tuned for major updates coming soon!</p>
-    <p>Our team is dedicated to providing the best gaming experience. We're constantly working on improvements and new features to enhance your gameplay. Have suggestions or feedback?</p></hr>
-      Feel free to reach out to us at pongscc@gmail.com!</p>
+    <p>Our team is dedicated to providing the best gaming experience. We're constantly working on improvements and new features to enhance your gameplay. Have suggestions or feedback?</p>
+    <p>Feel free to reach out to us at pongscc@gmail.com!</p>
   </div>
+</div>
 
-  <!-- Google Ad Code -->
-  <div style="height: 250px; /* Space for ads */"></div>
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-4931886961504425"
-       data-ad-slot="6193324862"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+
+
+  <!-- Featured Games -->
+  <div class="featured-games">
+    <h2>Advertisments:</br>Top Ten Recommended Games</h2>
+    <div class="scroll-left">&lt;</div>
+    <div class="scroll-right">&gt;</div>
+    <div class="game-info-container">
+      <div class="game-info">
+        <img src="gow.jpg" alt="Game 1">
+        <h3>God of War: Ragnarök</h3>
+        <p>Description: An action-adventure game following Kratos and his son Atreus as they navigate Norse mythology.</p>
+        <p>Platform: PlayStation 5 (PS5), PlayStation 4 (PS4)</p>
+        <p>Release Date: November 9, 2022</p>
+        <a href="https://www.playstation.com/it-it/games/god-of-war-ragnarok/" class="game-button">Learn More</a>
+      </div>
+      <div class="game-info">
+        <img src="rdr.jpg" alt="Game 2">
+        <h3>Red Dead Redemptio</br>n 2</h3>
+        <p>Description: An epic tale of life in America's unforgiving heartland, set in 1899.</p>
+        <p>Platform: PlayStation 5 (PS5), PlayStation 4 (PS4), Xbox One, Xbox Series X/S, PC</p>
+        <p>Release Date: October 26, 2018</p>
+        <a href="https://www.rockstargames.com/reddeadredemption2" class="game-button">Learn More</a>
+      </div>
+      <div class="game-info">
+        <img src="unc.jpg" alt="Game 3">
+        <h3>Uncharted 4: A Thief's End</h3>
+        <p>Description: The final installment of Nathan Drake's adventures, where he embarks on a globe-trotting journey to uncover a historical conspiracy.</p>
+        <p>Platform: PlayStation 5 (PS5), PlayStation 4 (PS4)</p>
+        <p>Release Date: May 10, 2016</p>
+        <a href="https://www.playstation.com/it-it/games/uncharted-4-a-thiefs-end/" class="game-button">Learn More</a>
+      </div>
+	  <div class="game-info">
+        <img src="gt4.jpg" alt="Game 3">
+        <h3>Grand Theft Auto IV</h3>
+        <p>Description: Set in the fictional Liberty City, the game follows the story of Niko Bellic, an Eastern European war veteran.</p>
+        <p>Platform: PlayStation 3 (PS3), Xbox 360, PC</p>
+        <p>Release Date: April 29, 2008</p>
+        <a href="https://www.rockstargames.com/games/IV" class="game-button">Learn More</a>
+      </div>
+	  <div class="game-info">
+        <img src="gt5.jpg" alt="Game 3">
+        <h3>Grand Theft Auto V</h3>
+        <p>Description: A sprawling open-world game set in the fictional state of San Andreas, following the lives of three criminals as they plan and execute a series of heists.</p>
+        <p>Platform: PlayStation 5 (PS5),PlayStation 4 (PS4), PlayStation 3 (PS3), Xbox 360, Xbox One, Xbox Series X/S, PC</p>
+        <p>Release Date: September 17, 2013</p>
+        <a href="https://www.rockstargames.com/gta-v" class="game-button">Learn More</a>
+      </div>
+	  <div class="game-info">
+        <img src="sm2.jpg" alt="Game 3">
+        <h3>Marvel's Spider-Man 2</h3>
+        <p>Description: The sequel to the popular superhero game, featuring an expanded open-world New York City and new storylines.</p>
+        <p>Platform: PlayStation 5 (PS5).</p>
+        <p>Release Date: October 20, 2023</p>
+        <a href="https://www.playstation.com/it-it/games/marvels-spider-man-2/" class="game-button">Learn More</a>
+      </div>
+	  <div class="game-info">
+        <img src="re4.jpg" alt="Game 3">
+        <h3>Resident Evil 4 (2023)</h3>
+        <p>Description: A survival horror game where Leon Kennedy, a former police officer, is sent on a mission to rescue the President's daughter from a mysterious cult in Europe.</p>
+        <p>Platform: PlayStation 5 (PS5), Xbox Series X/S, PC</p>
+        <p>Release Date: March 24, 2023</p>
+        <a href="https://www.residentevil.com/re4/en-asia/" class="game-button">Learn More</a>
+      </div>
+	  <div class="game-info">
+        <img src="y0.jpg" alt="Game 3">
+        <h3>Yakuza 0</h3>
+        <p>Description: The origin story of Kazuma Kiryu, a young yakuza member, and Goro Majima, a cabaret club owner, set in the late 1980s.</p>
+        <p>Platform: PlayStation 4 (PS4), PC, Xbox One</p>
+        <p>Release Date: January 24, 2017</p>
+        <a href="https://store.steampowered.com/agecheck/app/638970/" class="game-button">Learn More</a>
+      </div>
+	  <div class="game-info">
+        <img src="er.jpg" alt="Game 3">
+        <h3>Elden Ring</h3>
+        <p>Description: A dark fantasy action-RPG developed by FromSoftware in collaboration with George R. R. Martin, featuring a vast open world and challenging gameplay.</p>
+        <p>Platform: PlayStation 4 (PS4), PlayStation 5 (PS5), Xbox One, Xbox Series X/S, PC</p>
+        <p>Release Date: February 25, 2022</p>
+        <a href="https://en.bandainamcoent.eu/elden-ring/elden-ring" class="game-button">Learn More</a>
+      </div>
+	  <div class="game-info">
+        <img src="ban.jpg" alt="Game 3">
+        <h3>Batman Arkham Knight</h3>
+        <p>Description: The final installment in the Batman: Arkham series, where players control Batman as he confronts the Scarecrow and other villains threatening Gotham City.</p>
+        <p>Platform: Playstation 5 (PS5), PlayStation 4 (PS4), Xbox One, Nintendo Switch, PC</p>
+        <p>Release Date: June 23, 2015</p>
+        <a href="https://www.warnerbros.com/games-and-apps/batman-arkham-knight" class="game-button">Learn More</a>
+      </div>
+       <!-- Add more game-info divs as needed -->
+    </div>
+  </div>
+  <div class="ad-space" style="height: 250px;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="autorelaxed"
+     data-ad-client="ca-pub-4931886961504425"
+     data-ad-slot="2701760270"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
 
   <!-- Stars background -->
   <script>
@@ -168,5 +409,29 @@
 
   <!-- Google Font for 8-bit style -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+
+  <!-- Script for scrolling -->
+  <script>
+  const container = document.querySelector('.game-info-container');
+  const scrollLeft = document.querySelector('.scroll-left');
+  const scrollRight = document.querySelector('.scroll-right');
+
+  let scrollAmount = 0;
+  const maxScroll = (document.querySelectorAll('.game-info').length - 3.33) * -100;
+
+  scrollLeft.addEventListener('click', () => {
+    if (scrollAmount < 0) {
+      scrollAmount += 100;
+      container.style.transform = `translateX(${scrollAmount}%)`;
+    }
+  });
+
+  scrollRight.addEventListener('click', () => {
+    if (scrollAmount > maxScroll) {
+      scrollAmount -= 100;
+      container.style.transform = `translateX(${scrollAmount}%)`;
+    }
+  });
+</script>
 </body>
 </html>
