@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>G1 - Single Player</title>
@@ -21,6 +20,7 @@
       margin: auto;
       background-color: #000; /* Canvas background color */
       border: 2px solid #fff; /* Canvas border */
+      max-width: 100%;
     }
 
     .back-button {
@@ -124,16 +124,15 @@
   <!-- Ad Space -->
   <div class="ad-space">
     <!-- Google Ad Code -->
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4931886961504425"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="autorelaxed"
-     data-ad-client="ca-pub-4931886961504425"
-     data-ad-slot="1200142191"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4931886961504425"
+         data-ad-slot="6193324862"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
   </div>
 
   <!-- Stars Background -->
@@ -397,6 +396,40 @@ function updateBotPaddleHard() {
     paddleRightY += maxPaddleSpeed + 1; // Aumenta la velocità del paddle in hard mode
   }
 }
+canvas.addEventListener('touchstart', function(e) {
+  e.preventDefault();
+  if (e.targetTouches.length === 1) {
+    const touchPositionLeft = e.targetTouches[0].clientY - canvas.getBoundingClientRect().top;
+    touchStartLeftY = touchPositionLeft - paddleLeftY;
+    if (e.targetTouches[0].clientX < canvas.width / 2) {
+      touchMoveLeft = true;
+    } else {
+      touchMoveLeft = false; // Imposta touchMoveLeft a falso se si muove verso destra
+    }
+  }
+});
+
+canvas.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+  if (e.targetTouches.length === 1) {
+    const touchPositionLeft = e.targetTouches[0].clientY - canvas.getBoundingClientRect().top;
+    touchCurrentLeftY = touchPositionLeft - touchStartLeftY;
+
+    if (touchMoveLeft) {
+      if (touchCurrentLeftY >= 0 && touchCurrentLeftY <= canvas.height - paddleHeight) {
+        paddleLeftY = touchCurrentLeftY;
+      }
+    }
+    
+  }
+});
+
+canvas.addEventListener('touchend', function(e) {
+  e.preventDefault();
+  touchStartLeftY = 0;
+  touchCurrentLeftY = 0;
+  touchMoveLeft = false;
+});
 
 // Countdown function to animate countdown before starting the game
 function countdown(seconds, callback) {
@@ -414,6 +447,6 @@ function countdown(seconds, callback) {
 }
 
 let currentLevel = 'medium'; // Default level is medium
-  </script>
+</script>
 </body>
 </html>
